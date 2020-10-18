@@ -1,2 +1,2 @@
-# Image-Encryptiom-and-Steganography
+# Image-Encryption-and-Steganography
 Major Project
