@@ -75,46 +75,7 @@ public class EncryptionFile{
             }
         
         }
-        /*
-        int e=0,d=0;
-        System.out.println("Choose option number and press Enter\n 1. Encrypt\n 2. Decrypt (No image encrypted yet)");
-
-        e=scan.nextInt();
-        System.out.println("\n\n");
-
-        if(e==1){
-        System.out.println("Starting Encryption.....");
-        encryptFile.encrypt(directoryPath + fileToEncrypt, directoryPath + encryptedFile);
-        System.out.println("Encryption completed successfully...!!!\n");
-
-        }else{
-            System.out.println("\nInvalid Input\n");
-            System.exit(0);
-        }
-
         
-        System.out.println("Choose option number and press Enter\n 1.Encrypt (An encrypted image already exists)\n 2. Decrypt\n 3. To exit without decrypting");
-        d=scan.nextInt();
-        System.out.println("\n\n");
-
-        
-        if(d==2){
-        System.out.println("Starting Decprytion.........");
-        encryptFile.decrypt(directoryPath+encryptedFile,directoryPath+decryptedFile);
-        System.out.println("Decryption completed Succesfully...!!!\n");
-        }
-        
-        else if(d==3){
-            System.out.println("Exiting.....");            
-            System.out.println("Done!!!");
-            System.exit(0);
-
-        
-        }else{
-            System.out.println("\nInvalid Input\n");
-            System.exit(0);
-        }
-        */
        
     }
 
