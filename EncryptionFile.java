@@ -25,6 +25,8 @@ public class EncryptionFile{
             System.out.println(ex);
         }
     }
+
+
     public static void main(String[] args) {
         String fileToEncrypt="toEncrypt.jpg"; //image file to encrypt
         String encryptedFile="encryptedFile.jpg";
@@ -33,8 +35,47 @@ public class EncryptionFile{
         EncryptionFile encryptFile = new EncryptionFile();
         Scanner scan=new Scanner(System.in);
 
-        
 
+
+
+
+        System.out.println("************************************************");
+        System.out.println("////WELCOME TO ENCRYPTION/DECRPYTION PROGRAM////");
+        System.out.println("************************************************\n");
+
+        
+        //Initializing Menu with loop
+
+        
+        System.out.print("Enter number of operations: ");
+        int numberOfOperations=scan.nextInt();
+        System.out.println();
+
+        for(int i=0;i<numberOfOperations;i++){
+
+            System.out.println("Choose option number and press Enter\n 1. Encrypt\n 2. Decrypt");
+
+            int Option = scan.nextInt();
+
+            switch(Option){
+
+                case 1:
+                    System.out.println("Initializing.....");
+                    encryptFile.encrypt(directoryPath + fileToEncrypt, directoryPath + encryptedFile);
+                    System.out.println("Encryption completed successfully...!!!\n");
+                    break;
+
+                case 2:
+                    System.out.println("Initializing.....");
+                    encryptFile.decrypt(directoryPath+encryptedFile,directoryPath+decryptedFile);
+                    System.out.println("Decryption completed Succesfully...!!!\n");
+                    break;
+
+
+            }
+        
+        }
+        /*
         int e=0,d=0;
         System.out.println("Choose option number and press Enter\n 1. Encrypt\n 2. Decrypt (No image encrypted yet)");
 
@@ -73,11 +114,31 @@ public class EncryptionFile{
             System.out.println("\nInvalid Input\n");
             System.exit(0);
         }
+        */
        
     }
+
+
+
+
+    //Encrypt Function
+
+
     private void encrypt(String srcPath, String destPath){
-        File rawFile=new File("C:\\Users\\Parimal\\Pictures\\"+"toEncrypt.jpg");
-        File encryptedFile= new File("C:\\Users\\Parimal\\Pictures\\"+"encryptedFile.jpg");
+        Scanner scan = new Scanner(System.in);
+
+        //User will input exact name of the image, to be encrypted and desired name of the output encrypted file.
+
+        System.out.print("Enter name of image to be encrypted: ");   
+        String imageToEncrypt=scan.nextLine();
+        System.out.println();
+        System.out.println("Enter the desired name of the output encrypted image file: ");
+        String encryptedImageName=scan.nextLine();
+        System.out.println();
+        System.out.println("Starting Encryption.......\n");
+
+        File rawFile=new File("C:\\Users\\Parimal\\Pictures\\"+imageToEncrypt);
+        File encryptedFile= new File("C:\\Users\\Parimal\\Pictures\\"+encryptedImageName);
         InputStream inStream=null;
         OutputStream outStream=null;
 
@@ -111,9 +172,28 @@ public class EncryptionFile{
             System.out.println(ex);
         }
     }
+
+
+    //Decrypt Function
+
+
     private void decrypt(String srcPath, String destPath){
-        File encryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+"encryptedFile.jpg");
-        File decryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+"decryptedFile.jpg");
+
+        Scanner scan = new Scanner(System.in);
+
+        //User will input exact name of the image, to be decrypted and desired name of the output decrypted file.
+
+        System.out.print("Enter name of image to be decrypted: ");   
+        String imageToDecrypt=scan.nextLine();
+        System.out.println();
+        System.out.println("Enter the desired name of the output decrypted image file: ");
+        String decryptedImageName=scan.nextLine();
+        System.out.println();
+        System.out.println("Starting Decryption...............\n");
+
+
+        File encryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+imageToDecrypt);
+        File decryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+decryptedImageName);
         InputStream inStream=null;
         OutputStream outStream=null;
 
