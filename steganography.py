@@ -1,4 +1,3 @@
-#Hiding Text in an image
 
 from PIL import Image
 import binascii
@@ -76,25 +75,32 @@ def retr(filename):
 			else:
 				binary = binary + digit
 				if (binary[-16:] == '1111111111111110'):
-					print "Success"
+					print "The message is:"
 					return bin2str(binary[:-16])
 
 		return bin2str(binary)
 	return "Incorrect Image Mode, Couldn't Retrieve"
 
 def Main():
-        parser = optparse.OptionParser('usage %prog '+\
-		'-e/-d <target file>')
-	parser.add_option('-e', dest='hide', type='string', \
-		help='target picture path to hide text')
-	parser.add_option('-d', dest='retr', type='string', \
-		help='target picture path to retrieve text')
+        parser = optparse.OptionParser('usage %prog ' + '-e/-d <target file>')
+	parser.add_option('-e', dest='hide', type='string', help='target picture path to hide text')
+	parser.add_option('-d', dest='retr', type='string', help='target picture path to retrieve text')
 	
 	(options, args) = parser.parse_args()
+
+	print "##########################################"
+	print "#                                        #"
+	print "#    Welcome to Steganography Program    #"
+	print "#                                        #"
+	print "##########################################"
+	print
+
 	if (options.hide != None):
 		text = raw_input("Enter a message to hide: ")
+		print "Encoding...."
 		print hide(options.hide, text)
 	elif (options.retr != None):
+    		print "Decoding......"
                 print retr(options.retr)
 	else:
 		print parser.usage
@@ -103,6 +109,3 @@ def Main():
 
 if __name__ == '__main__':
 	Main()
-
-
-

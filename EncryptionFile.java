@@ -31,7 +31,8 @@ public class EncryptionFile{
         String fileToEncrypt="toEncrypt.jpg"; //image file to encrypt
         String encryptedFile="encryptedFile.jpg";
         String decryptedFile="decryptedFile.jpg";
-        String directoryPath="C:\\Users\\Parimal\\Pictures";
+        //String directoryPath="C:\\Users\\Parimal\\Pictures"; //For Windows
+        String directoryPath="/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"; //For Linux
         EncryptionFile encryptFile = new EncryptionFile();
         Scanner scan=new Scanner(System.in);
 
@@ -98,8 +99,10 @@ public class EncryptionFile{
         System.out.println();
         System.out.println("Starting Encryption.......\n");
 
-        File rawFile=new File("C:\\Users\\Parimal\\Pictures\\"+imageToEncrypt);
-        File encryptedFile= new File("C:\\Users\\Parimal\\Pictures\\"+encryptedImageName);
+        //File rawFile=new File("C:\\Users\\Parimal\\Pictures\\"+imageToEncrypt); //For Windows
+        File rawFile=new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+imageToEncrypt); //For Linux
+        //File encryptedFile= new File("C:\\Users\\Parimal\\Pictures\\"+encryptedImageName); //For Windows
+        File encryptedFile= new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+encryptedImageName); //For Linux
         InputStream inStream=null;
         OutputStream outStream=null;
 
@@ -153,8 +156,10 @@ public class EncryptionFile{
         System.out.println("Starting Decryption...............\n");
 
 
-        File encryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+imageToDecrypt);
-        File decryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+decryptedImageName);
+        //File encryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+imageToDecrypt); //For Windows
+        File encryptedFile = new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+imageToDecrypt); //For Linux
+        //File decryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+decryptedImageName); //For Windows
+        File decryptedFile = new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+decryptedImageName); //For Linux
         InputStream inStream=null;
         OutputStream outStream=null;
 
