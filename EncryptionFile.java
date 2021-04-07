@@ -1,9 +1,15 @@
-
-
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 import java.security.*;
 import javax.crypto.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 
 
@@ -31,8 +37,8 @@ public class EncryptionFile{
         String fileToEncrypt="toEncrypt.jpg"; //image file to encrypt
         String encryptedFile="encryptedFile.jpg";
         String decryptedFile="decryptedFile.jpg";
-        //String directoryPath="C:\\Users\\Parimal\\Pictures"; //For Windows
-        String directoryPath="/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"; //For Linux
+        String directoryPath="C:\\Users\\Parimal\\Pictures"; //For Windows
+        //String directoryPath="/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"; //For Linux
         EncryptionFile encryptFile = new EncryptionFile();
         Scanner scan=new Scanner(System.in);
 
@@ -68,7 +74,7 @@ public class EncryptionFile{
 
                 case 2:
                     System.out.println("Initializing.....");
-                    encryptFile.decrypt(directoryPath+encryptedFile,directoryPath+decryptedFile);
+                    encryptFile.decrypt(directoryPath + encryptedFile, directoryPath + decryptedFile);
                     System.out.println("Decryption completed Succesfully...!!!\n");
                     break;
 
@@ -99,14 +105,33 @@ public class EncryptionFile{
         System.out.println();
         System.out.println("Starting Encryption.......\n");
 
-        //File rawFile=new File("C:\\Users\\Parimal\\Pictures\\"+imageToEncrypt); //For Windows
-        File rawFile=new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+imageToEncrypt); //For Linux
-        //File encryptedFile= new File("C:\\Users\\Parimal\\Pictures\\"+encryptedImageName); //For Windows
-        File encryptedFile= new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+encryptedImageName); //For Linux
+        File rawFile = new File("C:\\Users\\Parimal\\Pictures\\"+imageToEncrypt); //For Windows
+        //File rawFile=new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+imageToEncrypt); //For Linux
+        File encryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+encryptedImageName); //For Windows
+        //File encryptedFile= new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+encryptedImageName); //For Linux
         InputStream inStream=null;
         OutputStream outStream=null;
 
+
+        String fileName = "C:\\Users\\Parimal\\Pictures\\"+imageToEncrypt;
+        Path path = Paths.get(fileName);
+        BufferedImage bimg;
+        int width = 0;
+        int height = 0;
+        long size =0;
+        try {
+            bimg = ImageIO.read(rawFile);
+            width = bimg.getWidth();
+            height = bimg.getHeight();
+            size = Files.size(path);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+
         try{
+            long startTime = System.nanoTime();
             //initializing encryption
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             
@@ -123,6 +148,12 @@ public class EncryptionFile{
             outStream.write(cipher.doFinal());
             inStream.close();
             outStream.close();
+
+            long endTime = System.nanoTime();
+
+            System.out.println("Resolution of input image is: " + width + " X " + height);
+            System.out.println("Size of image is: " + size + " Bytes");
+            System.out.println("Time to encrypt:"+ ((endTime - startTime)/1000000) + "ms");
             
         } catch(IllegalBlockSizeException ex){
             System.out.println(ex);
@@ -156,14 +187,29 @@ public class EncryptionFile{
         System.out.println("Starting Decryption...............\n");
 
 
-        //File encryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+imageToDecrypt); //For Windows
-        File encryptedFile = new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+imageToDecrypt); //For Linux
-        //File decryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+decryptedImageName); //For Windows
-        File decryptedFile = new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+decryptedImageName); //For Linux
+        File encryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+imageToDecrypt); //For Windows
+        //File encryptedFile = new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+imageToDecrypt); //For Linux
+        File decryptedFile = new File("C:\\Users\\Parimal\\Pictures\\"+decryptedImageName); //For Windows
+        //File decryptedFile = new File("/mnt/DA1C19171C18F06D/codingProjects/Projects/ImageEncryptionAndSteganography/"+decryptedImageName); //For Linux
         InputStream inStream=null;
         OutputStream outStream=null;
 
+        String fileName = "C:\\Users\\Parimal\\Pictures\\"+imageToDecrypt;
+        Path path = Paths.get(fileName);
+
+        
+        long size =0;
+        try {
+            
+            size = Files.size(path);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         try{
+            long startTime = System.nanoTime();
+
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
             inStream=new FileInputStream(encryptedFile);
@@ -177,6 +223,13 @@ public class EncryptionFile{
             outStream.write(cipher.doFinal());
             inStream.close();
             outStream.close();
+
+
+            long endTime = System.nanoTime();
+
+            System.out.println("Size of image is: " + size + " Bytes");
+            System.out.println("Time to decrypt:"+ ((endTime - startTime)/1000000) + "ms");
+
         } catch(IllegalBlockSizeException ex){
             System.out.println(ex);
         } catch(BadPaddingException ex){
